@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Nav, Navbar, NavItem, Modal, Button} from "react-bootstrap";
-import SignUp from './SignUp';
+import {Nav, Navbar, NavItem, Modal, Button, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
 import './style.css';
 
 
@@ -8,7 +7,13 @@ import './style.css';
 class TopNav extends Component {
     constructor(props) {
         super(props);
-        this.state = { showModal: false }
+        this.state = { 
+            showModal: false,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
+        };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
     }
@@ -17,6 +22,15 @@ class TopNav extends Component {
     }
     open() {
         this.setState({ showModal: true });
+    }
+    getValidationState() {
+        return 'success';
+    }
+    handleChange = (event) => {
+        this.setState({ [event.target.id]: event.target.value});
+    }
+    validateForm() {
+        return true;
     }
     render() {
         let brand = <a href="/#index" className='site-title'>DSentr</a>;
@@ -36,22 +50,30 @@ class TopNav extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>                    
                         <Nav pullRight> 
-                            <NavItem eventKey={2} onClick={this.open}>Sign Up</NavItem>
+                            <NavItem onClick={this.open}>Sign Up</NavItem>
                             <NavItem>Sign In</NavItem>                            
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Modal show={this.state.showModal} onHide={this.close}>
+                <Modal show={this.state.showModal} onHide={this.close} bsClass='modal'>
                     <Modal.Header closeButton>
                         <Modal.Title className='site-title'>Sign Up</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            This is a test
+                            <span className='site-title'>Bringing Devs and Sentries Together</span>
+                            <ControlLabel></ControlLabel>
+                            <hr />
+                            <form action='' method='POST'>
+                                <FormGroup controlId='firstName' bsSize='small' validationState={this.getValidationState()}>
+                                    <ControlLabel>First Name</ControlLabel>
+                                    <FormControl type='text' value={this.state.firstName} placeholder='First Name...' onChange={this.handleChange} />
+                                </FormGroup>                                
+                            </form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button bsSize='small' disabled={!this.validateForm()} onClick={this.close}>Close</Button>
                     </Modal.Footer>
                 </Modal>
           </div>

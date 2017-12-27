@@ -1,6 +1,68 @@
+
+
+html {
+  overflow-y: scroll !important;
+}
+
 html, body, section {
   height: 100vh;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-scrollbar-base-color:  #b97c2d;
+  scrollbar-base-color:  #b97c2d;
+  -ms-scrollbar-face-color: #b97c2daf;
+  scrollbar-face-color: #b97c2daf;
+  -ms-scrollbar-3dlight-color: rgb(252, 255, 61);
+  scrollbar-3dlight-color: rgb(252, 255, 61);
+  scrollbar-highlight-color:  rgb(0,0,0);
+  -ms-scrollbar-track-color:  rgb(255, 255, 255);
+  scrollbar-track-color:  rgb(255, 255, 255);
+  -ms-scrollbar-arrow-color: rgb(189, 137, 26);
+  scrollbar-arrow-color: rgb(189, 137, 26);
+  scrollbar-shadow-color:  rgb(252, 255, 61);
 }
+
+*:focus {
+  outline: none !important;
+}
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+	background-color: rgba(245, 245, 245, 0);
+}
+
+:-moz-scrollbar-track {
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+	background-color: rgba(245, 245, 245, 0);
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: rgba(245, 245, 245, 0);
+}
+
+::-moz-scrollbar
+{
+	width: 10px;
+	background-color: rgba(245, 245, 245, 0);
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #b97c2daf;
+	border: 2px solid #55555500;
+}
+
+::-moz-scrollbar-thumb
+{
+	background-color: #b97c2daf;
+	border: 2px solid #55555500;
+}
+
+
 
 body {
     
@@ -21,28 +83,35 @@ article {
   padding: 1rem;
 }
 
+.split-prep {
+  width:50%;
+}
 .split-container {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 50% 50%;
+  grid-template-columns: 50% 50%;
 }
 
 .split-article {
   position: relative;
   top: 50%;
   text-align: center;
-  transform: translate(0, -50%);
   padding: 1rem;
 }
 
-
-
 .left-side {
   background: #ff9e2c;
+  -ms-grid-column: 1;
   grid-column: 1;
+  line-height: 30px;
 }
 
 .right-side {
   background: #b6701e;
+  -ms-grid-column: 2;
   grid-column: 2;
+  line-height: 30px;
 }
 
 .site-title {
@@ -58,35 +127,46 @@ article {
   visibility: hidden; 
 }
 
-.scrollbar
-{
-  scrollbar-base-color:  rgb(250, 165, 69);
-  scrollbar-face-color: rgb(255, 153, 70);
-  scrollbar-3dlight-color: rgb(252, 255, 61);
-  scrollbar-highlight-color:  rgb(252, 255, 61);
-  scrollbar-track-color:  rgb(252, 255, 61);
-  scrollbar-arrow-color: black;
-  scrollbar-shadow-color:  rgb(252, 255, 61);
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;  
+}
+
+.modal-header {
+  background: linear-gradient(135deg, rgb(221, 221, 221), rgb(194, 173, 138) 60%, rgb(161, 161, 161)); 
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.modal-content {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 
-
-::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
-	background-color: rgba(245, 245, 245, 0);
+.modal-open {
+  overflow: auto;
+  padding-right:0 !important;
 }
 
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: rgba(245, 245, 245, 0);
+.form_row_input {
+  padding-top:0px;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: #b97c2daf;
-	border: 2px solid #55555500;
+.form_label_input {
+  padding-top:10px;
+}
+
+.form_entry_input {
+  padding-top: 10px;
+}
+
+.navbar {
+  background: linear-gradient(135deg, black, rgb(138, 130, 95) 60%, black);
 }
 

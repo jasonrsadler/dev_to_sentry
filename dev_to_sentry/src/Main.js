@@ -7,7 +7,6 @@ import How from './How';
 import Devs from './Devs';
 import Sentries from './Sentries';
 import SignIn from './SignIn';
-import SignUp from './SignUp';
 
 class Main extends Component {
     
@@ -17,26 +16,25 @@ class Main extends Component {
             <div>
                 <TopNav />
                 <div>
-                    <div className="split-container">            
+                    <div>            
                         
                         <Switch className="site-title">                    
                             <Route exact path='/' component={Home} />
                             <Route path='/How' component={How} />
                             <Route path='/Devs' component={Devs} />
                             <Route path='/Sentries' component={Sentries} />
-                            <Route path='/SignUp' component={SignUp} />
                             <Route path='/SignIn' component={SignIn} />
                         </Switch>
-                        <div className="site-title">
+                        <div>
                             <section id="section-1" className="split-container" name="split">
                                 <div className="left-side">
                                     <article className='split-article'>
-                                        <How />
+                                        <Devs />
                                     </article>
                                 </div>
                                 <div className="right-side">
                                     <article className='split-article'>
-                                        <Devs />
+                                        <How />
                                     </article>
                                 </div>
                             </section>
