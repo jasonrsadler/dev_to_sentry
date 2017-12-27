@@ -15,38 +15,45 @@ class Main extends Component {
         return (
             <BrowserRouter>
             <div>
-            <TopNav />
-                <div className="split-container">            
-                    
-                    <Switch className="site-title">                    
-                        <Route path='/How' component={How} />
-                        <Route path='/Devs' component={Devs} />
-                        <Route path='/Sentries' component={Sentries} />
-                        <Route exact path='/' component={Home} />
-                        <Route path='/SignUp' component={SignUp} />
-                        <Route path='/SignIn' component={SignIn} />
-                    </Switch>
-                    <div className="site-title">
-                        <section id="section-1">section 1</section>
-                        <section id="section-2">section 2</section>
-                        <section id="section-3">section 3</section>
+                <TopNav />
+                <div>
+                    <div className="split-container">            
+                        
+                        <Switch className="site-title">                    
+                            <Route exact path='/' component={Home} />
+                            <Route path='/How' component={How} />
+                            <Route path='/Devs' component={Devs} />
+                            <Route path='/Sentries' component={Sentries} />
+                            <Route path='/SignUp' component={SignUp} />
+                            <Route path='/SignIn' component={SignIn} />
+                        </Switch>
+                        <div className="site-title">
+                            <section id="section-1" className="split-container" name="split">
+                                <div className="left-side">
+                                    <article className='split-article'>
+                                        <How />
+                                    </article>
+                                </div>
+                                <div className="right-side">
+                                    <article className='split-article'>
+                                        <Devs />
+                                    </article>
+                                </div>
+                            </section>
+                            <section id="section-2">section 2</section>
+                            <section id="section-3">section 3</section>
+                        </div>                    
                     </div>
-                    <section id="section-1">
-                        <div className="left-half">
-                            <article>
-                                <How />
-                            </article>
-                        </div>
-                        <div className="right-half">
-                            <article>
-                                <Devs />
-                            </article>
-                        </div>
-                    </section>
                 </div>
-                </div>
+            </div>
             </BrowserRouter>
         );
     }
 }
 export default Main;
+
+//original jsx
+//<BrowserRouter>
+//<div id="index">
+//<TopNav />
+//    <div className="split-container">            
