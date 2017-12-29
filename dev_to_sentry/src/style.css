@@ -101,7 +101,7 @@ article {
 }
 
 .left-side {
-  background: #ff9e2c;
+  background: linear-gradient(135deg, #ff9e2c, rgb(194, 173, 138) 60%, #b6701e);
   -ms-grid-column: 1;
   grid-column: 1;
   line-height: 30px;
