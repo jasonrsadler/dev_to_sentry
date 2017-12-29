@@ -1,11 +1,10 @@
-
-
 html {
   overflow-y: scroll !important;
 }
 
 html, body, section {
   height: 100vh;
+  -ms-grid-rows: 1fr;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-scrollbar-base-color:  #b97c2d;
   scrollbar-base-color:  #b97c2d;
@@ -65,9 +64,9 @@ html, body, section {
 
 
 body {
-    
-    font-size: 1.25rem;
-    line-height: 150%;
+  
+  font-size: 1.25rem;
+  line-height: 150%;
 }
 
 h1 {
@@ -75,17 +74,104 @@ h1 {
   margin: 0 0 0.75rem 0;
 }
 
-article {
-  position: relative;
-  top: 50%;
-  text-align: center;
-  transform: translate(0, -50%);
-  padding: 1rem;
+.home-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25% 75%;
+  grid-template-columns: 25% 75%;
 }
 
-.split-prep {
-  width:50%;
+.home-left-col {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  background-color: black;
+  line-height: 30px;
 }
+
+.home-right-col {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  background: fixed;  
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .home-text {
+    display:block;
+    background: linear-gradient(135deg, rgb(255, 255, 255), rgb(58, 58, 58));
+    background: -webkit-linear-gradient(left, rgb(255, 255, 255) , rgb(58, 58, 58));
+    background: -o-linear-gradient(right, rgb(255, 255, 255), rgb(58, 58, 58));
+    background: -moz-linear-gradient(right, rgb(255, 255, 255), rgb(58, 58, 58));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .home-text-right {
+    display:block;
+    background: linear-gradient(135deg, white 90%, rgb(58, 58, 58));
+    background: -webkit-linear-gradient(left, rgb(255, 255, 255) 90%, rgb(58, 58, 58));
+    background: -o-linear-gradient(right, rgb(255, 255, 255) 90%, rgb(58, 58, 58));
+    background: -moz-linear-gradient(right, rgb(255, 255, 255) 90%, rgb(58, 58, 58));    
+    line-height: 60px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .home-tagline {
+    font-family: sans-serif;
+    font-size:2em;
+    display:block;
+    background: linear-gradient(135deg, white 90%, rgb(58, 58, 58));
+    background: -webkit-linear-gradient(left, rgb(255, 255, 255) 90%, rgb(58, 58, 58));
+    background: -o-linear-gradient(right, rgb(255, 255, 255) 90%, rgb(58, 58, 58));
+    background: -moz-linear-gradient(right, rgb(255, 255, 255) 90%, rgb(58, 58, 58));    
+    line-height:60px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;    
+  }
+}
+
+.home-tagline {
+  font-family: sans-serif;
+    font-size:2em;
+    display:block;
+    color:white;
+    line-height:3em;
+}
+
+.home-text-right {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 7rem;
+  display:block;
+  color:white;
+}
+
+
+.home-text {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 3rem;
+  display:block;
+  color:white;
+}
+
+
+
+
+.img-bg {
+  background-image: url('./images/stand_road.jpg'), -moz-linear-gradient(top, rgba(0, 0, 0, 255) 25%, rgba(0, 0, 0, 0) 100%);   /* FF3.6+ */
+  background-image: url('./images/stand_road.jpg'), -webkit-gradient(linear, left top, left bottom, color-stop(25%,rgba(0, 0, 0, 255)), color-stop(100%,rgba(0, 0, 0, 0))); /* Chrome,Safari4+ */
+  background-image: url('./images/stand_road.jpg'), -webkit-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Chrome10+,Safari5.1+ */
+  background-image: url('./images/stand_road.jpg'), -o-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Opera 11.10+ */
+  background-image: url('./images/stand_road.jpg'), -ms-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* IE10+ */
+  background-image: url('./images/stand_road.jpg'), linear-gradient(to right, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* W3C */
+  
+}
+
 .split-container {
   display: -ms-grid;
   display: grid;
@@ -93,11 +179,34 @@ article {
   grid-template-columns: 50% 50%;
 }
 
+.home-split-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25% 75%;
+  grid-template-columns: 25% 75%;
+}
+
+.home-split-article {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  padding: 1rem;
+  min-height: 500px;
+}
+
 .split-article {
   position: relative;
   top: 50%;
   text-align: center;
   padding: 1rem;
+}
+
+.split-article-tagline {
+  position: relative;
+  top: 15%;
+  text-align: right;
+  vertical-align: text-top;
+  padding-right:25%;
 }
 
 .left-side {
@@ -119,7 +228,7 @@ article {
   font-size: 3rem;
 }
 
-:not(*[id="section-1"]):before { 
+*[id="section-2"]:before { 
   display: block; 
   content: " "; 
   margin-top: -50px; 
@@ -150,7 +259,7 @@ article {
 
 
 .modal-open {
-  overflow: auto;
+  overflow: visible;
   padding-right:0 !important;
 }
 

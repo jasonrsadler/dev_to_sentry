@@ -35,7 +35,7 @@ class TopNav extends Component {
     render() {
         let brand = <a href="/#index" className='site-title'>DSentr</a>;
         return (
-            <div id="index" className="navbar">
+            <div id="index">
                 <Navbar fixedTop inverse>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -50,7 +50,7 @@ class TopNav extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>                    
                         <Nav pullRight> 
-                            <NavItem onClick={this.open}>Sign Up</NavItem>
+                            <NavItem  href='#signup' onClick={this.open}>Sign Up</NavItem>
                             <NavItem>Sign In</NavItem>                            
                         </Nav>
                     </Navbar.Collapse>
