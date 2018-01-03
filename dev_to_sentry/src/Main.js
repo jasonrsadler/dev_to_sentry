@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
+import axios from 'axios';
 import Home from './Home';
 import TopNav from './TopNav';
 import How from './How';
@@ -9,12 +10,27 @@ import Sentries from './Sentries';
 import SignIn from './SignIn';
 
 class Main extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = { data: [] };
+        this.handleUserSubmit = this.handleUserSubmit.bind(this);
+    }
+    handleUserSubmit(user) {
+        console.log('entering user submit');
+        let users = this.state.data;
+        this.setState({ data: users });
+        console.log('posting data');
+        axios.post(this.props.url, user)
+        .catch(err => {
+            console.error(err);
+            this.setState({ data: users});
+        }); 
+    }
     render() {
         return (
             <BrowserRouter>
             <div>
-                <TopNav />
+                <TopNav onUserSubmit={this.handleUserSubmit} />
                 <div>
                     <div>            
                         

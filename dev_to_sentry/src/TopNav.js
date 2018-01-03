@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+//import bCrypt from 'bcrypt';
 import {Nav, Navbar, NavItem, Modal, Button, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
 import './style.css';
+
 
 
     
@@ -12,10 +14,18 @@ class TopNav extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            password: '',
+            passwordConf: '',
+            pwdHash: ''
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handlePasswordConfChange = this.handlePasswordConfChange.bind(this);
+        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+        this.handleLastNameChange = this.handleLastNameChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     close() {
         this.setState({ showModal: false });
@@ -23,14 +33,42 @@ class TopNav extends Component {
     open() {
         this.setState({ showModal: true });
     }
+    handleFirstNameChange() {
+
+    }
+    handleLastNameChange() {
+
+    }
+    handleEmailChange(e) {
+        this.setState({ email: e.target.value });
+    }
+    handlePasswordChange(e) {
+        this.setState({ password: e.target.value });
+        //bCrypt.genSalt(this.saltRounds, function(err, salt) { 
+            //bCrypt.hash(this.password, salt, function(err, hash) {
+                //pwdHash: hash;
+            //});
+        //});
+    }
+    handlePasswordConfChange(e) {
+        this.setState({passwordConf: e.target.value });
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        let email = this.state.email.trim();
+        let password = this.state.password;
+        if (!email || !password) {
+            return;
+        }
+        this.props.onUserSubmit({ email: email, password: password })
+        this.setState({ email: '', password: '' });
+        console.log(`${this.state.email} registered`);
+    }
     getValidationState() {
         return 'success';
     }
-    handleChange = (event) => {
-        this.setState({ [event.target.id]: event.target.value});
-    }
     validateForm() {
-        return true;
+        return false;
     }
     render() {
         let brand = <a href="/#index" className='site-title'>DSentr</a>;
@@ -40,7 +78,7 @@ class TopNav extends Component {
                     <Navbar.Header>
                         <Navbar.Brand>
                             {brand}
-                        </Navbar.Brand>
+                        </Navbar.Brand> 
                         <Nav>                            
                             <NavItem eventKey={3} href="#section-1" className="anchor">section 1</NavItem>
                             <NavItem eventKey={4} href="#section-2" className="anchor">section 2</NavItem>
@@ -66,8 +104,15 @@ class TopNav extends Component {
                             <hr />
                             <form action='' method='POST'>
                                 <FormGroup controlId='firstName' bsSize='small' validationState={this.getValidationState()}>
+                                    <ControlLabel>Email Address</ControlLabel>
+                                    <FormControl type='text' value={this.state.email} placeholder='Email...' onChange={this.handleEmailChange} />
+                                    <ControlLabel>Password</ControlLabel>
+                                    <FormControl type='password' value={this.state.password} placeholder='Password...' onChange={this.handlePasswordChange} />
                                     <ControlLabel>First Name</ControlLabel>
-                                    <FormControl type='text' value={this.state.firstName} placeholder='First Name...' onChange={this.handleChange} />
+                                    <FormControl type='text' value={this.state.firstName} placeholder='First Name...' onChange={this.handleFirstNameChange} />
+                                    <ControlLabel>Last Name</ControlLabel>
+                                    <FormControl type='text' value={this.state.lastName} placeholder='Last Name...' onChange={this.handleLastNameChange} />
+                                    <Button type='submit' onClick={this.handleSubmit}>Register</Button>                                    
                                 </FormGroup>                                
                             </form>
                         </div>
@@ -75,12 +120,12 @@ class TopNav extends Component {
                     <Modal.Footer>
                         <Button bsSize='small' disabled={!this.validateForm()} onClick={this.close}>Close</Button>
                     </Modal.Footer>
+                    <div>
+                        <FormControl.Feedback />
+                    </div>
                 </Modal>
-          </div>
-            
-        );
-            
-    }
-    
+          </div>            
+        );            
+    }    
 }
 export default TopNav; 

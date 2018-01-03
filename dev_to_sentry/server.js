@@ -8,24 +8,24 @@ var User = require('./model/Users');
 var app = express();
 var router = express.Router();
 
-var port = process.env.API_PORT || 3001;
+var port = process.env.API_PORT || 3001;  
 
-var mongoDB = 'mongodb://127.0.0.1:27017/dsentrdb';
+var mongoDB = 'mongodb://jsadler:Forward_55@127.0.0.1:27017/dsentrdb?authSource=admin';
 mongoose.connect(mongoDB, {useMongoClient: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
  
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser.json());
-
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+app.use(bodyParser.urlencoded({ extended: true})); 
+app.use(bodyParser.json()); 
+ 
+app.use(function(req, res, next) {  
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
-
-    res.setHeader('Cache-Control', 'no-cache');
-    next();
+ 
+    res.setHeader('Cache-Control', 'no-cache'); 
+    next();  
 });
 
 router.get('/', function(req, res) {
@@ -47,7 +47,9 @@ router.route('/users')
     user.passwordConf = req.body.passwordConf;
     user.save(function(err) {
         if (err) { res.send(err); }
+        else {
         res.json({message: 'User added' });
+        }
     });
 });
 
