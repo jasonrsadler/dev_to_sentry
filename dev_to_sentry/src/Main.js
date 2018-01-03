@@ -64,10 +64,4 @@ class Main extends Component {
         );
     }
 }
-export default Main;
-
-//original jsx
-//<BrowserRouter>
-//<div id="index">
-//<TopNav />
-//    <div className="split-container">            
+export default Main;   
