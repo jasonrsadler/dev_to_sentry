@@ -279,10 +279,6 @@ h1 {
   background: linear-gradient(135deg, black, rgb(138, 130, 95) 60%, black);
 }
 
-.App {
-  
-}
-
 .App .navbar-brand {
   font-weight: bold;
 }
