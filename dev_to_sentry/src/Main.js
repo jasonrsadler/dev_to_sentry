@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './Routes';
 import axios from 'axios';
-import Home from './Home';
 import TopNav from './TopNav';
-import How from './How';
-import Devs from './Devs';
-import Sentries from './Sentries';
-import SignIn from './SignIn';
-
+import DevsHow from './containers/DevsHow';
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -29,37 +24,10 @@ class Main extends Component {
     render() {
         return (
             <BrowserRouter>
-            <div>
-                <TopNav onUserSubmit={this.handleUserSubmit} />
                 <div>
-                    <div>            
-                        
-                        <Switch className="site-title">                    
-                            <Route exact path='/' component={Home} />
-                            <Route path='/How' component={How} />
-                            <Route path='/Devs' component={Devs} />
-                            <Route path='/Sentries' component={Sentries} />
-                            <Route path='/SignIn' component={SignIn} />
-                        </Switch>
-                        <div>
-                            <section id="section-1" className="split-container" name="split">
-                                <div className="left-side">
-                                    <article className='split-article'>
-                                        <Devs />
-                                    </article>
-                                </div>
-                                <div className="right-side">
-                                    <article className='split-article'>
-                                        <How />
-                                    </article>
-                                </div>
-                            </section>
-                            <section id="section-2">section 2</section>
-                            <section id="section-3">section 3</section>
-                        </div>                    
-                    </div>
+                    <TopNav onUserSubmit={this.handleUserSubmit} />
+                    <Routes />            
                 </div>
-            </div>
             </BrowserRouter>
         );
     }

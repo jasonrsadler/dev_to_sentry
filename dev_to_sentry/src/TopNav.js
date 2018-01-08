@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-//import bCrypt from 'bcrypt';
-import {Nav, Navbar, NavItem, Modal, Button, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
-import './style.css';
+import { Link } from 'react-router-dom';
+import {Nav, Navbar, Modal, Button, FormControl} from "react-bootstrap";
+import RouteNavItem from './components/RouteNavItem';
+import Login from './containers/Login';
+import './style.css';;
 
 
 
@@ -11,20 +13,14 @@ class TopNav extends Component {
         super(props);
         this.state = { 
             showModal: false,
-            firstName: '',
-            lastName: '',
-            email: '',
             password: '',
             passwordConf: '',
-            pwdHash: ''
+            pwdHash: '',
+            status: '',
+            feedback: ''
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handlePasswordConfChange = this.handlePasswordConfChange.bind(this);
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     close() {
@@ -33,63 +29,56 @@ class TopNav extends Component {
     open() {
         this.setState({ showModal: true });
     }
-    handleFirstNameChange() {
-
-    }
-    handleLastNameChange() {
-
-    }
-    handleEmailChange(e) {
-        this.setState({ email: e.target.value });
-    }
-    handlePasswordChange(e) {
-        this.setState({ password: e.target.value });
-        //bCrypt.genSalt(this.saltRounds, function(err, salt) { 
-            //bCrypt.hash(this.password, salt, function(err, hash) {
-                //pwdHash: hash;
-            //});
-        //});
-    }
-    handlePasswordConfChange(e) {
-        this.setState({passwordConf: e.target.value });
-    }
+    
     handleSubmit(e) {
+        e.stopPropagation();
         e.preventDefault();
-        let email = this.state.email.trim();
-        let password = this.state.password;
-        if (!email || !password) {
-            return;
+        var firstName = this.refs.firstName.state.className,
+            email = this.refs.email.state.className;
+        var feedback = [], status = '', ok = 'ok';
+        if (!firstName !== ok) {
+            feedback = 'Error on First Name';
+            status = 'err';
+            this.setState({status: status, feedback: feedback});
+            return 0;
         }
-        this.props.onUserSubmit({ email: email, password: password })
-        this.setState({ email: '', password: '' });
-        console.log(`${this.state.email} registered`);
+    
+        //let email = this.state.email.trim();
+        //let password = this.state.password;
+        //if (!email || !password) {
+            //return;
+        //}
+        //this.props.onUserSubmit({ email: email, password: password })
+        //this.setState({ email: '', password: '' });
+        //console.log(`${this.state.email} registered`);
     }
     getValidationState() {
         return 'success';
     }
     validateForm() {
-        return false;
+        //let first_name = this.state.firstName.trim();
+        //let last_name = this.state.lastName.trim();
+        //let email = this.state.email.trim();
+        //return (validator.isAlpha(first_name) && validator.isAlpha(last_name) && validator.isEmail(email)) 
+        return true;
     }
     render() {
-        let brand = <a href="/#index" className='site-title'>DSentr</a>;
         return (
             <div id="index">
-                <Navbar fixedTop inverse>
+                <Navbar fixedTop collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            {brand}
+                            <Link to="/" className='site-title'>DSentr</Link>
                         </Navbar.Brand> 
-                        <Nav>                            
-                            <NavItem eventKey={3} href="#section-1" className="anchor">section 1</NavItem>
-                            <NavItem eventKey={4} href="#section-2" className="anchor">section 2</NavItem>
-                            <NavItem eventKey={5} href="#section-3" className="anchor">section 3</NavItem>
-                        </Nav>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>                    
                         <Nav pullRight> 
-                            <NavItem  href='#signup' onClick={this.open}>Sign Up</NavItem>
-                            <NavItem>Sign In</NavItem>                            
+                            <RouteNavItem eventKey={3} href="/DevsHow" className="anchor">section 1</RouteNavItem>
+                            <RouteNavItem eventKey={4} href="/Sentries" className="anchor">section 2</RouteNavItem>
+                            <RouteNavItem eventKey={5} href="section-3" className="anchor">section 3</RouteNavItem>
+                            <RouteNavItem eventKey={6} href="#sign-up" onClick={this.open}>Sign Up</RouteNavItem>
+                            <RouteNavItem eventKey={7} href="#sign-in">Sign In</RouteNavItem>                            
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -100,25 +89,12 @@ class TopNav extends Component {
                     <Modal.Body>
                         <div>
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
-                            <ControlLabel></ControlLabel>
                             <hr />
-                            <form action='' method='POST'>
-                                <FormGroup controlId='firstName' bsSize='small' validationState={this.getValidationState()}>
-                                    <ControlLabel>Email Address</ControlLabel>
-                                    <FormControl type='text' value={this.state.email} placeholder='Email...' onChange={this.handleEmailChange} />
-                                    <ControlLabel>Password</ControlLabel>
-                                    <FormControl type='password' value={this.state.password} placeholder='Password...' onChange={this.handlePasswordChange} />
-                                    <ControlLabel>First Name</ControlLabel>
-                                    <FormControl type='text' value={this.state.firstName} placeholder='First Name...' onChange={this.handleFirstNameChange} />
-                                    <ControlLabel>Last Name</ControlLabel>
-                                    <FormControl type='text' value={this.state.lastName} placeholder='Last Name...' onChange={this.handleLastNameChange} />
-                                    <Button type='submit' onClick={this.handleSubmit}>Register</Button>                                    
-                                </FormGroup>                                
-                            </form>
+                            <Login />
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button bsSize='small' disabled={!this.validateForm()} onClick={this.close}>Close</Button>
+                        <Button bsSize='small' onClick={this.close}>Close</Button>
                     </Modal.Footer>
                     <div>
                         <FormControl.Feedback />
