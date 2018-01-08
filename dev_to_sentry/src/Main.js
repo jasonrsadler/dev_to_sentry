@@ -28,7 +28,7 @@ class Main extends Component {
     }
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter> 
             <div>
                 <TopNav onUserSubmit={this.handleUserSubmit} />
                 <div>
