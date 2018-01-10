@@ -5,23 +5,19 @@ import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 class Email extends Component {
     constructor(props) {
         super(props);
-        this.state = { className: '', value: '' };
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { email: '' };
     }
-    handleChange(e) {
-        var value = e.target.value;
-        var className = value ? 'ok' : 'err';
-        this.setState({className: className, value: value});
-
-    }
+    
     render() {
         return (
-            <FormGroup controlId='email'>
+            <FormGroup controlId='email' bsSize='large'>
                 <ControlLabel>Email Address</ControlLabel>
                 <FormControl autoFocus
                     type='email'
-                    value={this.state.value} placeholder='Email...' 
-                    onChange={this.handleChange} />
+                    value={this.props.email}                     
+                    onChange={this.props.update}
+                    placeholder='Email...' 
+                />
             </FormGroup>
         )
     }

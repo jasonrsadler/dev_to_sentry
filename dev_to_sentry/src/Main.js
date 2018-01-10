@@ -3,12 +3,14 @@ import { BrowserRouter } from 'react-router-dom';
 import Routes from './Routes';
 import axios from 'axios';
 import TopNav from './TopNav';
-import DevsHow from './containers/DevsHow';
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { data: [] , isAuthenticated: false };
         this.handleUserSubmit = this.handleUserSubmit.bind(this);
+    }
+    userHasAuthenticated = authenticated => {
+        this.setState({ isAuthenticated: authenticated });
     }
     handleUserSubmit(user) {
         console.log('entering user submit');
@@ -22,11 +24,15 @@ class Main extends Component {
         }); 
     }
     render() {
+        const childProps = { 
+            isAuthenticated: this.state.isAuthenticated,
+            userHasAuthenticated: this.userHasAuthenticated
+        };
         return (
             <BrowserRouter>
                 <div>
                     <TopNav onUserSubmit={this.handleUserSubmit} />
-                    <Routes />            
+                    <Routes childProps={childProps} />            
                 </div>
             </BrowserRouter>
         );

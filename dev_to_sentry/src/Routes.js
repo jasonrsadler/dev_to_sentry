@@ -4,12 +4,13 @@ import Home from './containers/Home';
 import DevsHow from './containers/DevsHow';
 import Sentries from './containers/Sentries';
 import NotFound from './containers/NotFound';
-import SignIn from './SignIn';
+import Login from './containers/Login';
 
 
 export default () =>
 <Switch>
     <Route path="/" exact component={Home} />
+    <Route path='/login' exact component={Login} />
     <Route path='/DevsHow' component={DevsHow} />
     <Route path='/Sentries' component={Sentries} />
     <Route component={NotFound} />

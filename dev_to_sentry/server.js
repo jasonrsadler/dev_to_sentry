@@ -28,6 +28,9 @@ app.use(function(req, res, next) {
     next();  
 });
 
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
+
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized'});
 });

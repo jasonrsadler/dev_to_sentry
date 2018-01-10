@@ -21,7 +21,6 @@ class TopNav extends Component {
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
     close() {
         this.setState({ showModal: false });
@@ -30,11 +29,11 @@ class TopNav extends Component {
         this.setState({ showModal: true });
     }
     
-    handleSubmit(e) {
+    handleSubmi = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        var firstName = this.refs.firstName.state.className,
-            email = this.refs.email.state.className;
+        var firstName = this.refs.firstName.state.className
+            //email = this.refs.email.state.className;
         var feedback = [], status = '', ok = 'ok';
         if (!firstName !== ok) {
             feedback = 'Error on First Name';
@@ -82,6 +81,7 @@ class TopNav extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
+                
                 <Modal show={this.state.showModal} onHide={this.close} bsClass='modal'>
                     <Modal.Header closeButton>
                         <Modal.Title className='site-title'>Sign Up</Modal.Title>
@@ -90,12 +90,9 @@ class TopNav extends Component {
                         <div>
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Login />
+                            <Login url='https://localhost:3001/api/users' />
                         </div>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button bsSize='small' onClick={this.close}>Close</Button>
-                    </Modal.Footer>
                     <div>
                         <FormControl.Feedback />
                     </div>
