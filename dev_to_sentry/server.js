@@ -4,6 +4,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var User = require('./model/Users');
+const authRoutes = require('./routes/auth');
+
 
 var app = express();
 var router = express.Router();
@@ -28,8 +30,7 @@ app.use(function(req, res, next) {
     next();  
 });
 
-const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
+
 
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized'});
@@ -55,8 +56,8 @@ router.route('/users')
         }
     });
 });
-
 app.use('/api', router);
 app.listen(port, function() {
     console.log(`api running on port ${port}`);
 });
+authRoutes(app);

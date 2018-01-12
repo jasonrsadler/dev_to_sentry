@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {Nav, Navbar, Modal, Button, FormControl} from "react-bootstrap";
 import RouteNavItem from './components/RouteNavItem';
 import Login from './containers/Login';
+import Register from './containers/Register';
 import './style.css';;
 
 
@@ -90,7 +91,7 @@ class TopNav extends Component {
                         <div>
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Login url='https://localhost:3001/api/users' />
+                            <Login url='https://localhost:3001/api/auth' />
                         </div>
                     </Modal.Body>
                     <div>
