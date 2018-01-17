@@ -13,7 +13,7 @@ class Login extends Component {
         this.state = { email: '', password: '' };
     }
 
-    validateForm() {
+    validateForm = () => {
 
         return validator.isEmail(this.state.email.trim()) && this.state.password.trim().length > 6;
     }
@@ -22,16 +22,14 @@ class Login extends Component {
     }
     handleSubmit = event => {
         event.preventDefault();   
-        this.processForm();     
-    }
-    processForm = () => {
+        
         const email = encodeURIComponent(this.state.email);
         const password = encodeURIComponent(this.state.password);
         let authInfo = {email: email, password: password};
         console.log(authInfo);
         console.log(this.props.url);
         axios.post(this.props.url, authInfo).then(res => {
-
+            
         })
         .catch(err => {
             console.error(err);
@@ -45,7 +43,6 @@ class Login extends Component {
                     <PasswordInfo password={this.state.password} update={this.handleChange}/>
                     <Button
                         block
-                        bsSize='large'
                         disabled={!this.validateForm()}
                         type='submit'
                     >

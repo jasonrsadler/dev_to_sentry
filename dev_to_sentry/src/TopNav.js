@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {Nav, Navbar, Modal, Button, FormControl} from "react-bootstrap";
+import {Nav, Navbar, Modal, FormControl} from "react-bootstrap";
 import RouteNavItem from './components/RouteNavItem';
 import Login from './containers/Login';
 import Register from './containers/Register';
@@ -13,24 +13,29 @@ class TopNav extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            showModal: false,
+            showLoginModal: false,
+            showRegisterModal: false,
             password: '',
             passwordConf: '',
             pwdHash: '',
             status: '',
             feedback: ''
         };
-        this.close = this.close.bind(this);
-        this.open = this.open.bind(this);
     }
-    close() {
-        this.setState({ showModal: false });
+    closeLogin = () => {
+        this.setState({ showLoginModal: false });
     }
-    open() {
-        this.setState({ showModal: true });
+    closeRegister = () => {
+        this.setState({ showRegisterModal: false })
+    }
+    openLogin = () => {
+        this.setState({ showLoginModal: true });
+    }
+    openRegister = () => {
+        this.setState({ showRegisterModal: true})
     }
     
-    handleSubmi = (e) => {
+    handleSubmit = (e) => {
         e.stopPropagation();
         e.preventDefault();
         var firstName = this.refs.firstName.state.className
@@ -77,22 +82,35 @@ class TopNav extends Component {
                             <RouteNavItem eventKey={3} href="/DevsHow" className="anchor">section 1</RouteNavItem>
                             <RouteNavItem eventKey={4} href="/Sentries" className="anchor">section 2</RouteNavItem>
                             <RouteNavItem eventKey={5} href="section-3" className="anchor">section 3</RouteNavItem>
-                            <RouteNavItem eventKey={6} href="#sign-up" onClick={this.open}>Sign Up</RouteNavItem>
-                            <RouteNavItem eventKey={7} href="#sign-in">Sign In</RouteNavItem>                            
+                            <RouteNavItem eventKey={6} href="#sign-up" onClick={this.openRegister}>Sign Up</RouteNavItem>
+                            <RouteNavItem eventKey={7} href="#sign-in" onClick={this.openLogin}>Sign In</RouteNavItem>                            
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 
-                <Modal show={this.state.showModal} onHide={this.close} bsClass='modal'>
+                <Modal show={this.state.showLoginModal} onHide={this.closeLogin} bsStyle='large'>
                     <Modal.Header closeButton>
-                        <Modal.Title className='site-title'>Sign Up</Modal.Title>
+                        <Modal.Title className='site-title'>Sign In</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div>
+                            <span className='site-title'>Sign In To Continue</span>
+                            <hr />
+                            <Login url={process.env.API_URL || 'http://localhost:3001/auth/login' } />
+                        </div>
+                    </Modal.Body>
+                    <div>
+                        <FormControl.Feedback />
+                    </div>
+                </Modal>
+                <Modal show={this.state.showRegisterModal} onHide={this.closeRegister} bsStyle='large'>
+                    <Modal.Header closeButton>
+                        <Modal.Title className='site-title'>Register</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>                        
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Login url='https://localhost:3001/api/auth' />
-                        </div>
+                            <Register url={process.env.API_URL || 'http://localhost:3001/auth/register' } />
                     </Modal.Body>
                     <div>
                         <FormControl.Feedback />

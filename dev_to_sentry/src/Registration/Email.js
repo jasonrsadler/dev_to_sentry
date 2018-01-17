@@ -2,15 +2,10 @@ import React, {Component} from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
 
-class Email extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { email: '' };
-    }
-    
+export default class Email extends Component {
     render() {
         return (
-            <FormGroup controlId='email' bsSize='large'>
+            <FormGroup controlId='email'>
                 <ControlLabel>Email Address</ControlLabel>
                 <FormControl autoFocus
                     type='email'
@@ -22,4 +17,3 @@ class Email extends Component {
         )
     }
 }
-export default Email;

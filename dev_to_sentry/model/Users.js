@@ -9,12 +9,6 @@ var UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    username: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
-    },
     password: { 
         type: String,
         required: true,
@@ -30,7 +24,7 @@ var UserSchema = new mongoose.Schema({
 UserSchema.pre('save', function(next) {
     let user = this;
     if (!user.isModified('password')) return next();
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
         if (err) return next(err);
         bcrypt.hash(user.password, salt, function(err, hash) {
             user.password = hash;
@@ -39,12 +33,25 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
+UserSchema.statics.authenticate = (email, password, callback) => {
+    User.findOne({ email: email })
+    .exec((err, user) => {
+        if (err) {
+            return callback(err)            
+        } else if (!user) {
+            var err = new Error('User not found.');
+            err.status = 401;
+            return callback(err);
+        }
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (result === true) {
+                return callback(null, user);
+            } else {
+                return callback();
+            }
+        })
     });
-};
+}
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
