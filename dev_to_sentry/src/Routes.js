@@ -5,6 +5,7 @@ import DevsHow from './containers/DevsHow';
 import Sentries from './containers/Sentries';
 import NotFound from './containers/NotFound';
 import Login from './containers/Login';
+import Profile from './Profile';
 
 
 export default () =>
@@ -13,5 +14,6 @@ export default () =>
     <Route path='/login' exact component={Login} />
     <Route path='/DevsHow' component={DevsHow} />
     <Route path='/Sentries' component={Sentries} />
+    <Route path='/Profile' component={Profile} />
     <Route component={NotFound} />
 </Switch>;

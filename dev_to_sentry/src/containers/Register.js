@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import validator from 'validator';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import FirstName from '../Registration/FirstName';
 import LastName from '../Registration/LastName';
 import Email from '../Registration/Email';
@@ -15,7 +15,8 @@ export default class Register extends Component {
     }
     validateForm = () => {
 
-        return validator.isEmail(this.state.email.trim()) && this.state.password.trim().length > 6;
+        return validator.isEmail(this.state.email.trim()) && this.state.password.trim().length > 6 && validator.isAlpha(this.state.firstName) &&
+            validator.isAlpha(this.state.lastName) && (this.state.password === this.state.passwordConf);
     }
     handleChange = event => {        
         this.setState({[event.target.id]: event.target.value });   
@@ -29,18 +30,22 @@ export default class Register extends Component {
         const lastName = encodeURIComponent(this.state.lastName);
         const passwordConf = encodeURIComponent(this.state.passwordConf);
         let authInfo = {firstName: firstName, lastName: lastName, email: email, password: password, passwordConf: passwordConf};
-        console.log(authInfo);
-        console.log(this.props.url);
         axios.post(this.props.url, authInfo).then(res => {
-            
+            if (!res.data.redirectUrl) {
+                this.props.feedback(res.data.msg);
+            }
+            else {
+                this.props.closeModal();
+                window.location.href = res.data.redirectUrl;
+            }
         })
         .catch(err => {
-            console.error(err);
+            console.error('Error: ' + err);
         });
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <Form horizontal onSubmit={this.handleSubmit}>
                 <Email email={this.state.email} update={this.handleChange}/>
                 <FirstName firstName={this.state.firstName} update={this.handleChange} />
                 <LastName lastName={this.state.lastName} update={this.handleChange} />
@@ -53,7 +58,7 @@ export default class Register extends Component {
                 >
                 Register
                 </Button>
-            </form>
+            </Form>
         )
     }
 }

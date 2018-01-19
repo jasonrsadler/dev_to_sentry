@@ -7,7 +7,7 @@ export default props =>
     path={props.href}
     exact
     children={({match, history}) =>
-        <NavItem 
+        <NavItem className="anchor"
             onClick={e => history.push(e.currentTarget.getAttribute("href"))}
             {...props}
             active={match ? true : false}

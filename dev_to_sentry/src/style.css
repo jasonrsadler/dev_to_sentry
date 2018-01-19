@@ -96,13 +96,14 @@ h1 {
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .home-text {
     display:block;
-    background: linear-gradient(135deg, rgb(255, 255, 255), rgb(58, 58, 58));
-    background: -webkit-linear-gradient(left, rgb(255, 255, 255) , rgb(58, 58, 58));
-    background: -o-linear-gradient(right, rgb(255, 255, 255), rgb(58, 58, 58));
-    background: -moz-linear-gradient(right, rgb(255, 255, 255), rgb(58, 58, 58));
+    background: linear-gradient(135deg, rgb(255, 255, 255), rgb(179, 178, 178));
+    background: -webkit-linear-gradient(left, rgb(255, 255, 255) , rgb(179, 178, 178));
+    background: -o-linear-gradient(right, rgb(255, 255, 255), rgb(179, 178, 178));
+    background: -moz-linear-gradient(right, rgb(255, 255, 255), rgb(179, 178, 178));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
 
@@ -122,7 +123,7 @@ h1 {
 
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .home-tagline {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size:2em;
     display:block;
     background: linear-gradient(135deg, white 90%, rgb(58, 58, 58));
@@ -137,7 +138,7 @@ h1 {
 }
 
 .home-tagline {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size:2em;
   display:block;
   color:white;
@@ -153,7 +154,7 @@ h1 {
 
 
 .home-text {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 3rem;
   display:block;
   color:white;
@@ -228,6 +229,16 @@ h1 {
   font-size: 3rem;
 }
 
+a.site-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 3rem;
+  color:white !important;
+}
+
+a.site-title:hover {
+  color:rgb(207, 204, 204) !important;
+}
+
 *[id="section-2"]:before { 
   display: block; 
   content: " "; 
@@ -236,13 +247,17 @@ h1 {
   visibility: hidden; 
 }
 
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
 
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;  
-  height: auto;
+.navbar-default .navbar-nav>li>a:hover {
+  color:rgb(207, 204, 204) !important;
+}
+
+
+.modal { 
+  padding-top:10%;
 }
 
 .modal-header {

@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { ControlLabel, FormControl, FormGroup, Col } from 'react-bootstrap';
 
 
 class LastName extends Component {
     render() {
         return (
             <FormGroup controlId='lastName'>
-                <ControlLabel>Last Name</ControlLabel>
-                <FormControl 
-                    type='text'
-                    value={this.props.lastName}                     
-                    onChange={this.props.update}
-                    placeholder='Last Name...' 
-                />
+                <Col componentClass={ControlLabel} sm={2}>
+                    Last Name
+                </Col>
+                 <Col sm={10}>
+                    <FormControl 
+                        type='text'
+                        value={this.props.lastName}                     
+                        onChange={this.props.update}
+                        placeholder='Last Name...' 
+                    />
+                </Col>
             </FormGroup>
         )
     }

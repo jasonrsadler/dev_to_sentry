@@ -25,7 +25,7 @@ class TopNav extends Component {
     closeLogin = () => {
         this.setState({ showLoginModal: false });
     }
-    closeRegister = () => {
+    closeRegister = () => {        
         this.setState({ showRegisterModal: false })
     }
     openLogin = () => {
@@ -38,39 +38,15 @@ class TopNav extends Component {
     handleSubmit = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        var firstName = this.refs.firstName.state.className
-            //email = this.refs.email.state.className;
-        var feedback = [], status = '', ok = 'ok';
-        if (!firstName !== ok) {
-            feedback = 'Error on First Name';
-            status = 'err';
-            this.setState({status: status, feedback: feedback});
-            return 0;
-        }
-    
-        //let email = this.state.email.trim();
-        //let password = this.state.password;
-        //if (!email || !password) {
-            //return;
-        //}
-        //this.props.onUserSubmit({ email: email, password: password })
-        //this.setState({ email: '', password: '' });
-        //console.log(`${this.state.email} registered`);
     }
-    getValidationState() {
-        return 'success';
-    }
-    validateForm() {
-        //let first_name = this.state.firstName.trim();
-        //let last_name = this.state.lastName.trim();
-        //let email = this.state.email.trim();
-        //return (validator.isAlpha(first_name) && validator.isAlpha(last_name) && validator.isEmail(email)) 
-        return true;
+
+    handleFeedback = (data) => {
+        this.setState({feedback: data});
     }
     render() {
         return (
             <div id="index">
-                <Navbar fixedTop collapseOnSelect>
+                <Navbar fixedTop collapseOnSelect inverse>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <Link to="/" className='site-title'>DSentr</Link>
@@ -79,16 +55,16 @@ class TopNav extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>                    
                         <Nav pullRight> 
-                            <RouteNavItem eventKey={3} href="/DevsHow" className="anchor">section 1</RouteNavItem>
-                            <RouteNavItem eventKey={4} href="/Sentries" className="anchor">section 2</RouteNavItem>
-                            <RouteNavItem eventKey={5} href="section-3" className="anchor">section 3</RouteNavItem>
+                            <RouteNavItem eventKey={3} href="/DevsHow">section 1</RouteNavItem>
+                            <RouteNavItem eventKey={4} href="/Sentries">section 2</RouteNavItem>
+                            <RouteNavItem eventKey={5} href="/section-3">section 3</RouteNavItem>
                             <RouteNavItem eventKey={6} href="#sign-up" onClick={this.openRegister}>Sign Up</RouteNavItem>
                             <RouteNavItem eventKey={7} href="#sign-in" onClick={this.openLogin}>Sign In</RouteNavItem>                            
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 
-                <Modal show={this.state.showLoginModal} onHide={this.closeLogin} bsStyle='large'>
+                <Modal show={this.state.showLoginModal} onHide={this.closeLogin} dialogClassName='modal'>
                     <Modal.Header closeButton>
                         <Modal.Title className='site-title'>Sign In</Modal.Title>
                     </Modal.Header>
@@ -110,11 +86,12 @@ class TopNav extends Component {
                     <Modal.Body>                        
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Register url={process.env.API_URL || 'http://localhost:3001/auth/register' } />
+                            <Register url={process.env.API_URL || 'http://localhost:3001/auth/register' } feedback={this.handleFeedback} closeModal={this.closeRegister} />
                     </Modal.Body>
-                    <div>
+                    <Modal.Footer>
                         <FormControl.Feedback />
-                    </div>
+                        <span>{this.state.feedback}</span>
+                    </Modal.Footer>
                 </Modal>
           </div>            
         );            

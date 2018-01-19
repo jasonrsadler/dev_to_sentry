@@ -36,7 +36,7 @@ authRoutes.post('/login', (req, res, next) => {
                 return next(err);
             } else {
                 req.session.userId = user._id;
-                return res.redirect('/profile');
+                return res.redirect('/Profile');
             }
         });
     } else {
@@ -53,11 +53,6 @@ authRoutes.post('/register', (req, res, next) => {
         res.send("Passwords must match");
         return next(err);
     }
-    console.log(req.body.email);
-    console.log(req.body.first_name);
-    console.log(req.body.lastName);
-    console.log(req.body.password);
-    console.log(req.body.passwordConf);
     if (req.body.email &&
         req.body.firstName &&
         req.body.lastName &&
@@ -65,26 +60,40 @@ authRoutes.post('/register', (req, res, next) => {
         req.body.passwordConf) {
             var userData = {
                 email: req.body.email,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
+                first_name: req.body.firstName,
+                last_name: req.body.lastName,
                 password: req.body.password
             }
-            User.create(userData, (error, user) => {
-                if (error) {
-                    return next(error);
-                } else {
-                    req.session.userId = user._id;
-                    return res.redirect('/profile');
+            User.findOne({email: userData.email}, (err, obj) => { 
+                if (obj) {
+                    return res.status(200).json({
+                        success: false, 
+                        msg: 'An account with that email is already registered'
+                    });
+                }
+                else
+                {
+                    User.create(userData, (error, user) => {
+                        if (error) {
+                            return next(error);
+                        } else {
+                            return res.status(200).json({ 
+                                success: true,
+                                redirectUrl: '/Profile' 
+                            });                    
+                        }
+                    });
                 }
             });
+            
         } else {
-            var err = new Error('Something went wrong');
+            var err = new Error('Something went wrong'); 
             err.status = 500;
             res.send('Something went wrong');
             return next(err);
         }
     })    
-    .get('/profile', (req, res, next) => {
+    .get('/Profile', (req, res, next) => {
         User.findById(req.session.userId)
         .exec((error, user) => {
             if (error) {

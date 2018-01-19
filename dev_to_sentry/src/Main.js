@@ -14,12 +14,12 @@ class Main extends Component {
     }
     handleUserSubmit(user) {
         console.log('entering user submit');
-        let users = this.state.data;
+        let users = this.state.data; 
         this.setState({ data: users });
         console.log('posting data');
         axios.post(this.props.url, user)
         .catch(err => {
-            console.error(err);
+            console.error(err); 
             this.setState({ data: users});
         }); 
     }
@@ -29,7 +29,7 @@ class Main extends Component {
             userHasAuthenticated: this.userHasAuthenticated
         };
         return (
-            <BrowserRouter>
+            <BrowserRouter >
                 <div>
                     <TopNav onUserSubmit={this.handleUserSubmit} />
                     <Routes childProps={childProps} />            

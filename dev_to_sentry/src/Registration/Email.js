@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { ControlLabel, FormControl, FormGroup, Col } from 'react-bootstrap';
 
 
 export default class Email extends Component {
     render() {
         return (
             <FormGroup controlId='email'>
-                <ControlLabel>Email Address</ControlLabel>
-                <FormControl autoFocus
-                    type='email'
-                    value={this.props.email}                     
-                    onChange={this.props.update}
-                    placeholder='Email...' 
-                />
+                <Col componentClass={ControlLabel} sm={2}>
+                    Email
+                </Col>
+                <Col sm={10}>
+                    <FormControl autoFocus
+                        type='email'
+                        value={this.props.email}                     
+                        onChange={this.props.update}
+                        placeholder='Email...' 
+                    />
+                </Col>
             </FormGroup>
         )
     }
