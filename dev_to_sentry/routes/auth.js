@@ -1,6 +1,13 @@
-var authRoutes = require('express').Router();
+var bodyParser = require('body-parser');
 var validator = require('validator');
 var User = require('../model/Users');
+var express = require('express');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+
+var app = express();
+var authRoutes = express.Router();
+
 
 
 function validateLoginForm(payload) { 
@@ -28,6 +35,7 @@ function validateLoginForm(payload) {
 }
 
 authRoutes.post('/login', (req, res, next) => {
+    
     if (req.body.email && req.body.password) {
         User.authenticate(req.body.email, req.body.password, (error, user) => {
             if (error || !user) {
@@ -46,7 +54,11 @@ authRoutes.post('/login', (req, res, next) => {
     }
 });
 
+
+
 authRoutes.post('/register', (req, res, next) => {
+    console.log(req.body);
+    
     if (req.body.password !== req.body.passwordConf) {
         var err = new Error('Passwords do not match.');
         err.status = 400;
@@ -77,9 +89,11 @@ authRoutes.post('/register', (req, res, next) => {
                         if (error) {
                             return next(error);
                         } else {
+                            req.session.userId = user._id;
+                            console.log('SESSION ON POST: ' + JSON.stringify(req.session.userId));
                             return res.status(200).json({ 
                                 success: true,
-                                redirectUrl: '/Profile' 
+                                redirectUrl: '/Profile'
                             });                    
                         }
                     });
@@ -92,19 +106,21 @@ authRoutes.post('/register', (req, res, next) => {
             res.send('Something went wrong');
             return next(err);
         }
-    })    
-    .get('/Profile', (req, res, next) => {
+    });
+    authRoutes.get('/profile', (req, res, next) => {
+        console.log('SESSION ON GET: ' + JSON.stringify(req.session));
         User.findById(req.session.userId)
         .exec((error, user) => {
             if (error) {
                 return next(error);
             } else {
-                if (user === null) {
+                if (user === null) { 
                     var err = new Error('Not authorized to view this page');
-                    err.status = 400;
+                    err.status = 401;
                     return next(err);
                 } else {
-                    return res.send('<h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
+                    console.log(user.first_name + ' ' + user.last_name + ' ' + user.email);
+                    return res.status(200).json({ firstName: user.first_name, lastName: user.last_name, email: user.email });
                 }
             }
         });
@@ -120,4 +136,6 @@ authRoutes.post('/register', (req, res, next) => {
             });
         }
     });
+
+    
     module.exports = authRoutes;

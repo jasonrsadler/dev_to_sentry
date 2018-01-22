@@ -72,7 +72,7 @@ class TopNav extends Component {
                         <div>
                             <span className='site-title'>Sign In To Continue</span>
                             <hr />
-                            <Login url={process.env.API_URL || 'http://localhost:3001/auth/login' } />
+                            <Login url={process.env.API_AUTH_URL || 'http://localhost:3001/auth/' } />
                         </div>
                     </Modal.Body>
                     <div>
@@ -86,11 +86,11 @@ class TopNav extends Component {
                     <Modal.Body>                        
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Register url={process.env.API_URL || 'http://localhost:3001/auth/register' } feedback={this.handleFeedback} closeModal={this.closeRegister} />
+                            <Register url={process.env.API_AUTH_URL || 'http://localhost:3001/auth/' } feedback={this.handleFeedback} closeModal={this.closeRegister} />
                     </Modal.Body>
                     <Modal.Footer>
                         <FormControl.Feedback />
-                        <span>{this.state.feedback}</span>
+                        <span className='feedback'>{this.state.feedback}</span>
                     </Modal.Footer>
                 </Modal>
           </div>            

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
+//import createHistory from 'history/createBrowserHistory';
 import FirstName from '../Registration/FirstName';
 import LastName from '../Registration/LastName';
 import Email from '../Registration/Email';
 import PasswordInfo from '../Registration/PasswordInfo';
 import PasswordConf from '../Registration/PasswordConf';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = { firstName: '', lastName: '', email: '', password: '', passwordConf: '' };
@@ -30,18 +32,24 @@ export default class Register extends Component {
         const lastName = encodeURIComponent(this.state.lastName);
         const passwordConf = encodeURIComponent(this.state.passwordConf);
         let authInfo = {firstName: firstName, lastName: lastName, email: email, password: password, passwordConf: passwordConf};
-        axios.post(this.props.url, authInfo).then(res => {
-            if (!res.data.redirectUrl) {
-                this.props.feedback(res.data.msg);
-            }
-            else {
+        axios.post(this.props.url + '/register', authInfo).then(res => {
+            // if (!res.data.redirectUrl) {
+            //     this.props.feedback(res.data.msg);
+            // }
+            // else {
                 this.props.closeModal();
-                window.location.href = res.data.redirectUrl;
-            }
+                //const history = createHistory();
+                this.props.history.push('/Profile');
+                //window.location.href = res.data.redirectUrl;
+            //}
         })
         .catch(err => {
             console.error('Error: ' + err);
         });
+    }
+    setSession = (sessionData) => {
+        let expiresAt = JSON.stringify((sessionData.expiresIn * 1000) + new Date().getTime());
+        localStorage.setItem('session', sessionData);
     }
     render() {
         return (
@@ -62,3 +70,4 @@ export default class Register extends Component {
         )
     }
 }
+export default withRouter(Register);

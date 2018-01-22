@@ -1,38 +1,33 @@
 'use strict'
-var app = require('express')();
-var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var validator = require('validator');
+var db = require('./config/MongoConfig');
 var User = require('./model/Users');
+var express = require('express');
 var session = require('express-session');
-var authRoutes = require('./routes/auth');
-var router = require('./routes/routes');
 var MongoStore = require('connect-mongo')(session);
 
-var port = process.env.API_PORT || 3001;  
-var session_sec = process.env.SESSION_SEC || 'work_hard'
+var app = express();
 
-var mongoDB = 'mongodb://jsadler:Forward_55@127.0.0.1:27017/dsentrdb?authSource=admin';
-mongoose.connect(mongoDB, {useMongoClient: true});
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'db connection error:'));
-db.once('open', () => {
-    console.log('db connected');
-});
+var port = process.env.API_PORT || 3001;  
+
+var session_sec = process.env.SESSION_SEC || 'work_hard';
 
 app.use(session({
     secret: session_sec,
-    resave: true,
-    saveUninitialized: false,
+    resave:false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.SECURE_COOKIE || false },
     store: new MongoStore({
-        mongooseConnection: db
+        mongooseConnection: db,
+        ttl: 60 * 30
     })
 }));
- 
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: false })); 
 
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function(req, res, next) {  
-    res.setHeader('Access-Control-Allow-Origin', '*'); 
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); 
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'); 
@@ -40,8 +35,8 @@ app.use(function(req, res, next) {
     next();  
 });
 
-app.use('/api', router);
-app.use('/auth', authRoutes);
+app.use('/api', require('./routes/routes'));
+app.use('/auth', require('./routes/auth'));
 
 app.use((req, res, next) => {
     var err = new Error('File Not Found');

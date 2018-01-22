@@ -273,6 +273,14 @@ a.site-title:hover {
   border-radius: 10px;
 }
 
+.modal-footer {
+  background: linear-gradient(135deg, rgb(221, 221, 221), rgb(194, 173, 138) 60%, rgb(161, 161, 161)); 
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  border-radius: 0px 0px 10px 10px;
+  height: 5rem;
+}
+
 
 .modal-open {
   overflow: visible;
@@ -306,6 +314,10 @@ a.site-title:hover {
 
 .register-modal {
   min-height: 200px;
+}
+
+.feedback {
+  color: rgb(61, 25, 25);
 }
 
 @media all and (min-width:480px) {
