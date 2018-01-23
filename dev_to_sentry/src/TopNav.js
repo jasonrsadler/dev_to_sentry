@@ -54,10 +54,12 @@ class TopNav extends Component {
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>                    
-                        <Nav pullRight> 
+                        <Nav> 
                             <RouteNavItem eventKey={3} href="/DevsHow">section 1</RouteNavItem>
                             <RouteNavItem eventKey={4} href="/Sentries">section 2</RouteNavItem>
                             <RouteNavItem eventKey={5} href="/section-3">section 3</RouteNavItem>
+                        </Nav>
+                        <Nav pullRight>
                             <RouteNavItem eventKey={6} href="#sign-up" onClick={this.openRegister}>Sign Up</RouteNavItem>
                             <RouteNavItem eventKey={7} href="#sign-in" onClick={this.openLogin}>Sign In</RouteNavItem>                            
                         </Nav>
@@ -86,7 +88,7 @@ class TopNav extends Component {
                     <Modal.Body>                        
                             <span className='site-title'>Bringing Devs and Sentries Together</span>
                             <hr />
-                            <Register url={process.env.API_AUTH_URL || 'http://localhost:3001/auth/' } feedback={this.handleFeedback} closeModal={this.closeRegister} />
+                            <Register url={process.env.API_AUTH_URL || 'http://localhost:3001/auth/' } feedback={this.handleFeedback} closeModal={this.closeRegister} showAlert={this.props.showAlert} hideAlert={this.props.hideAlert} />
                     </Modal.Body>
                     <Modal.Footer>
                         <FormControl.Feedback />

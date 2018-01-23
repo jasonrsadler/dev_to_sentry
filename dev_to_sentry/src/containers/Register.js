@@ -33,23 +33,18 @@ class Register extends Component {
         const passwordConf = encodeURIComponent(this.state.passwordConf);
         let authInfo = {firstName: firstName, lastName: lastName, email: email, password: password, passwordConf: passwordConf};
         axios.post(this.props.url + '/register', authInfo).then(res => {
-            // if (!res.data.redirectUrl) {
-            //     this.props.feedback(res.data.msg);
-            // }
-            // else {
+            if (!res.data.redirectUrl) {
+                this.props.feedback(res.data.msg);
+                this.props.showAlert(res.data.msg, 'danger');
+            }
+            else {
                 this.props.closeModal();
-                //const history = createHistory();
-                this.props.history.push('/Profile');
-                //window.location.href = res.data.redirectUrl;
-            //}
+                this.props.history.push(res.data.redirectUrl);
+            }
         })
         .catch(err => {
             console.error('Error: ' + err);
         });
-    }
-    setSession = (sessionData) => {
-        let expiresAt = JSON.stringify((sessionData.expiresIn * 1000) + new Date().getTime());
-        localStorage.setItem('session', sessionData);
     }
     render() {
         return (

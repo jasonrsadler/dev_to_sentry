@@ -3,7 +3,7 @@ html {
 }
 
 html, body, section {
-  height: 100vh;
+  height:100vh;
   -ms-grid-rows: 1fr;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-scrollbar-base-color:  #b97c2d;
@@ -67,6 +67,7 @@ body {
   
   font-size: 1.25rem;
   line-height: 150%;
+  padding-top: 50px;
 }
 
 h1 {
@@ -326,7 +327,38 @@ a.site-title:hover {
   }
   .Login form {
     margin: 0 auto;
-    max-width: 320px;
+    max-width: 480px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .LoginButton {
+    max-width: 100px;
   }
 }
+
+.alert-margin {
+  margin: 0 0 0 0;
+}
+
+.alerts-leave {
+  opacity: 1;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-bottom: 20px;
+  height: 50px;
+}
+.alerts-leave.alerts-leave-active {
+  overflow: hidden;
+  opacity: 0.01;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  height: 0px;
+  transition: opacity 300ms ease-in,
+              padding-top 500ms ease-in,
+              padding-bottom 500ms ease-in,
+              margin-bottom 500ms ease-in,
+              height 500ms ease-in;
+}
+
+
 

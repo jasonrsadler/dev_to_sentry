@@ -18,6 +18,11 @@ var UserSchema = new mongoose.Schema({
     },
     last_name: {
         type: String
+    },
+    activated: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

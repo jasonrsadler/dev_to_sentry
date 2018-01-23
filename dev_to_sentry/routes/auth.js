@@ -74,7 +74,8 @@ authRoutes.post('/register', (req, res, next) => {
                 email: req.body.email,
                 first_name: req.body.firstName,
                 last_name: req.body.lastName,
-                password: req.body.password
+                password: req.body.password,
+                activated: false
             }
             User.findOne({email: userData.email}, (err, obj) => { 
                 if (obj) {
@@ -124,8 +125,8 @@ authRoutes.post('/register', (req, res, next) => {
                 }
             }
         });
-    })
-    .get('/logout', (req, res, next) => {
+    });
+    authRoutes.get('/logout', (req, res, next) => {
         if (req.session) {
             req.session.destroy((err) => {
                 if (err) {

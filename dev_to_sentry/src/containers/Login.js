@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 //import bCrypt from 'bcrypt';
 import validator from 'validator';
@@ -38,17 +38,17 @@ class Login extends Component {
     render() {
         return (
             <div className='Login'>
-                <form onSubmit={this.handleSubmit}>
+                <Form horizontal onSubmit={this.handleSubmit}>
                     <Email email={this.state.email} update={this.handleChange}/>
                     <PasswordInfo password={this.state.password} update={this.handleChange}/>
-                    <Button
+                    <Button 
                         block
                         disabled={!this.validateForm()}
                         type='submit'
                     >
                     Logon
                     </Button>
-                </form>
+                </Form>
             </div>
         );
     }
