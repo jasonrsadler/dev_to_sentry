@@ -1,8 +1,6 @@
-html {
-  overflow-y: scroll !important;
-}
 
-html, body, section {
+
+html, body {
   height:100vh;
   -ms-grid-rows: 1fr;
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -18,6 +16,19 @@ html, body, section {
   -ms-scrollbar-arrow-color: rgb(189, 137, 26);
   scrollbar-arrow-color: rgb(189, 137, 26);
   scrollbar-shadow-color:  rgb(252, 255, 61);
+  margin:0;
+  padding:0;
+}
+
+
+body {
+  
+  font-size: 1.25rem;
+  line-height: 150%;
+}
+
+section {
+  padding-top:50px;
 }
 
 *:focus {
@@ -63,12 +74,6 @@ html, body, section {
 
 
 
-body {
-  
-  font-size: 1.25rem;
-  line-height: 150%;
-  padding-top: 50px;
-}
 
 h1 {
   font-size: 1.75rem;
@@ -77,22 +82,22 @@ h1 {
 
 .home-grid {
   display: -ms-grid;
-  display: grid;
+  display: flex;
   -ms-grid-columns: 25% 75%;
   grid-template-columns: 25% 75%;
 }
 
 .home-left-col {
+  height:100vh;
   -ms-grid-column: 1;
   grid-column: 1;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.842);
   line-height: 30px;
 }
 
 .home-right-col {
   -ms-grid-column: 2;
   grid-column: 2;
-  background: fixed;  
 }
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .home-text {
@@ -104,7 +109,7 @@ h1 {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Archivo';
   }
 }
 
@@ -124,7 +129,7 @@ h1 {
 
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .home-tagline {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Archivo';
     font-size:2em;
     display:block;
     background: linear-gradient(135deg, white 90%, rgb(58, 58, 58));
@@ -139,7 +144,7 @@ h1 {
 }
 
 .home-tagline {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Archivo';
   font-size:2em;
   display:block;
   color:white;
@@ -147,7 +152,7 @@ h1 {
 }
 
 .home-text-right {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Archivo Black';
   font-size: 7rem;
   display:block;
   color:white;
@@ -155,7 +160,7 @@ h1 {
 
 
 .home-text {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Archivo';
   font-size: 3rem;
   display:block;
   color:white;
@@ -164,17 +169,11 @@ h1 {
 
 
 
-.img-bg {
-  background-image: url('./images/stand_road.jpg'), -moz-linear-gradient(top, rgba(0, 0, 0, 255) 25%, rgba(0, 0, 0, 0) 100%);   /* FF3.6+ */
-  background-image: url('./images/stand_road.jpg'), -webkit-gradient(linear, left top, left bottom, color-stop(25%,rgba(0, 0, 0, 255)), color-stop(100%,rgba(0, 0, 0, 0))); /* Chrome,Safari4+ */
-  background-image: url('./images/stand_road.jpg'), -webkit-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Chrome10+,Safari5.1+ */
-  background-image: url('./images/stand_road.jpg'), -o-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Opera 11.10+ */
-  background-image: url('./images/stand_road.jpg'), -ms-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* IE10+ */
-  background-image: url('./images/stand_road.jpg'), linear-gradient(to right, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* W3C */
-  
-}
+
 
 .split-container {
+  position:relative;
+  height:100vh;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 50% 50%;
@@ -182,10 +181,13 @@ h1 {
 }
 
 .home-split-container {
+  position:relative;
+  height: 100vh;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 25% 75%;
   grid-template-columns: 25% 75%;
+  
 }
 
 .home-split-article {
@@ -212,6 +214,7 @@ h1 {
 }
 
 .left-side {
+  height: 100vh;
   background: linear-gradient(135deg, #ff9e2c, rgb(194, 173, 138) 60%, #b6701e);
   -ms-grid-column: 1;
   grid-column: 1;
@@ -328,7 +331,7 @@ a.site-title:hover {
   .Login form {
     margin: 0 auto;
     max-width: 480px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Archivo';
   }
   .LoginButton {
     max-width: 100px;
@@ -358,6 +361,55 @@ a.site-title:hover {
               padding-bottom 500ms ease-in,
               margin-bottom 500ms ease-in,
               height 500ms ease-in;
+}
+
+.wrapper {
+  height: 100vh;
+  /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+  overflow-x: hidden;
+  /* Enable scrolling on the page. */
+  overflow-y:auto;
+  /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+  -webkit-perspective: 1px;
+  perspective: 2px;
+  -webkit-perspective-origin: 100vw 50%;
+  -moz-perspective-origin: 100vw 50%;
+  -ms-perspective-origin: 100vw 50%;
+  perspective-origin: 100vw 50%;
+
+}
+
+.parallax::after {
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom:0;
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-2px) scale(3);
+ -webkit-transform-origin: 100% 100% 0px;
+ -moz-transform-origin: 100% 100% 0px;
+  -ms-transform-origin: 100% 100% 0px;
+  transform-origin: 100% 100% 0px;
+  /* Force the background image to fill the whole element. */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -1;
+}
+
+.img-bg::after {
+  background-image: url('./images/stand_road.jpg'), -moz-linear-gradient(top, rgba(0, 0, 0, 255) 25%, rgba(0, 0, 0, 0) 100%);   /* FF3.6+ */
+  background-image: url('./images/stand_road.jpg'), -webkit-gradient(linear, left top, left bottom, color-stop(25%,rgba(0, 0, 0, 255)), color-stop(100%,rgba(0, 0, 0, 0))); /* Chrome,Safari4+ */
+  background-image: url('./images/stand_road.jpg'), -webkit-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Chrome10+,Safari5.1+ */
+  background-image: url('./images/stand_road.jpg'), -o-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* Opera 11.10+ */
+  background-image: url('./images/stand_road.jpg'), -ms-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* IE10+ */
+  background-image: url('./images/stand_road.jpg'), linear-gradient(to right, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* W3C */
+  
 }
 
 
