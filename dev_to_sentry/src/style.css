@@ -370,19 +370,14 @@ a.site-title:hover {
   /* Enable scrolling on the page. */
   overflow-y:auto;
   /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
-  -webkit-perspective: 1px;
   perspective: 2px;
-  -webkit-perspective-origin: 100vw 50%;
-  -moz-perspective-origin: 100vw 50%;
-  -ms-perspective-origin: 100vw 50%;
-  perspective-origin: 100vw 50%;
 
 }
 
 .parallax::after {
   /* Display and position the pseudo-element */
   content: " ";
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -391,10 +386,6 @@ a.site-title:hover {
    * then scale it back up to fill the viewport.
    * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
   transform: translateZ(-2px) scale(3);
- -webkit-transform-origin: 100% 100% 0px;
- -moz-transform-origin: 100% 100% 0px;
-  -ms-transform-origin: 100% 100% 0px;
-  transform-origin: 100% 100% 0px;
   /* Force the background image to fill the whole element. */
   background-repeat: no-repeat;
   background-size: cover;
@@ -410,6 +401,16 @@ a.site-title:hover {
   background-image: url('./images/stand_road.jpg'), -ms-linear-gradient(top, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* IE10+ */
   background-image: url('./images/stand_road.jpg'), linear-gradient(to right, rgba(0, 0, 0, 255) 25%,rgba(0, 0, 0, 0) 100%); /* W3C */
   
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  color: rgb(0, 204, 170) !important;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  color: rgb(102, 255, 230) !important;
 }
 
 
